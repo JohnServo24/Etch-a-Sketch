@@ -1,54 +1,81 @@
+// NOTE: The extra, messy comments are for myself so that I can understand what's going on
+
+
 
 // Function to add color to a pixel
 const changeColor = pixel => {
+    // Gets the target ID from the object of the div
     const square = document.getElementById(pixel.originalTarget.id);
+    // Changes it into black
     square.style.backgroundColor = "black";
 };
 
 // Function to create board
 const createBoard = (board, pixels) => {
+    // Grid to scale the amount of boxes to the size of the whole board
     board.style.gridTemplateColumns = `repeat(${pixels}, ${100/pixels}%)`;
 
+    // Adds all of the required divs inside the board
     for(let i = 0; i < pixels * pixels; i++) {
         const pixel = document.createElement("div");
-        pixel.classList.add("pixel");
-        pixel.id = "pixel" + i;
+        pixel.classList.add("pixel"); // To be used w/ CSS
+        pixel.id = "pixel" + i; // For identification purposes in the hovering
+
+        // appropriate sizes to scale the amount of boxes to the size of the whole board
         pixel.style.width = `${960/pixels}px`;
-        pixel.style.height = `${960/pixels}psx`;
+        pixel.style.height = `${960/pixels}px`;
 
         board.append(pixel);
     }
     
-    // Returns the nodelist of all pixels to be used later
+    // Returns the nodelist of all pixels to be used in the hover function
     const boardOutput = document.querySelectorAll(".pixel");
     return boardOutput;
 };
 
+// Clears the board
 const clearBoard = board => {
-    while(board.firstChild) {
-        board.removeChild(board.firstChild);
+    while(board.firstChild) { // Checks if the board has a first child
+        board.removeChild(board.firstChild); // If there is, deletes it
     }
+
+    // This function will keep on checking if there is a child and 
+    // kills them until there are no children anymore
 };
 
+// Function to detect if the mosue has hovered
 const hoverColor = (pixel, changeColor) => {
+    // Selects all of the pixels under the board
     pixel.forEach(square => {
+        // This will wait until the mouse has hoevered on one of the pixels
+        // If the mouse has hovered on one of the pixels, this activates
         square.addEventListener("mouseover", changeColor);
     });
 }
 
+// Changes the size of the board
 const changeSize = (board, pixel, hoverColor) => {
+    // Asks user to enter the size of the grid
     const size = prompt("Plese enter the size of the grid");
+    // Clears the board because if we don't clear it,
+    // The new board is gonna be added on top of the old board
     clearBoard(board);
+
+    // Creates the board and puts its nodelist in this variable
+    // The reason why we need to put the nodelist in this variable
+    // is so that we can use it on the hoverColor function
     pixel = createBoard(board, parseInt(size));
     hoverColor(pixel, changeColor);
 };
 
-const board = document.getElementById("board");
-const changeSizeBtn = document.getElementById("changeSizeBtn");
+const board = document.getElementById("board"); // Gets the board
+const changeSizeBtn = document.getElementById("changeSizeBtn"); // Gets the button
 
+// Creates the default board
 let pixel = createBoard(board, 16);
 hoverColor(pixel, changeColor);
 
+// Button to change the size of the board
 changeSizeBtn.addEventListener("click", () => {changeSize(board, pixel, hoverColor)});
 
 
