@@ -10,6 +10,13 @@ const changeColor = pixel => {
     square.style.backgroundColor = "black";
 };
 
+// Creates the default board
+const defaultBoard = (board, hoverColor, changeColor) => {
+    // Creates a 16x16 board
+    let pixel = createBoard(board, 16);
+    hoverColor(pixel, changeColor);
+};
+
 // Function to create board
 const createBoard = (board, pixels) => {
     // Grid to scale the amount of boxes to the size of the whole board
@@ -51,12 +58,23 @@ const hoverColor = (pixel, changeColor) => {
         // If the mouse has hovered on one of the pixels, this activates
         square.addEventListener("mouseover", changeColor);
     });
-}
+};
 
 // Changes the size of the board
-const changeSize = (board, pixel, hoverColor) => {
+const changeSize = (board, createBoard, hoverColor, clearBoard, changeColor) => {
     // Asks user to enter the size of the grid
-    const size = prompt("Plese enter the size of the grid");
+    let size = prompt("Plese enter the size of the grid");
+
+    if (size === "") { // If the user didn't enter anything
+        return;
+    } else if (size >= 100) { // If the user entered a number > 100
+        alert("Please enter a size below 100");
+        return;
+    } else if (isNaN(parseInt(size))) { // If the user entered a string
+        alert ("Please enter a number!");
+        return;
+    }
+
     // Clears the board because if we don't clear it,
     // The new board is gonna be added on top of the old board
     clearBoard(board);
@@ -64,7 +82,7 @@ const changeSize = (board, pixel, hoverColor) => {
     // Creates the board and puts its nodelist in this variable
     // The reason why we need to put the nodelist in this variable
     // is so that we can use it on the hoverColor function
-    pixel = createBoard(board, parseInt(size));
+    let pixel = createBoard(board, parseInt(size));
     hoverColor(pixel, changeColor);
 };
 
@@ -72,11 +90,10 @@ const board = document.getElementById("board"); // Gets the board
 const changeSizeBtn = document.getElementById("changeSizeBtn"); // Gets the button
 
 // Creates the default board
-let pixel = createBoard(board, 16);
-hoverColor(pixel, changeColor);
+defaultBoard(board, hoverColor, changeColor);
 
 // Button to change the size of the board
-changeSizeBtn.addEventListener("click", () => {changeSize(board, pixel, hoverColor)});
+changeSizeBtn.addEventListener("click", () => {changeSize(board, createBoard, hoverColor, clearBoard, changeColor)});
 
 
 
