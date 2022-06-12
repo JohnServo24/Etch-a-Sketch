@@ -65,7 +65,7 @@ const changeSize = (board, createBoard, hoverColor, clearBoard, changeColor) => 
     // Asks user to enter the size of the grid
     let size = prompt("Plese enter the size of the grid");
 
-    if (!size) { // If the user didn't enter anything
+    if (!size) { // If the user didn't enter anything. Basically checks for falsy values
         return;
     } else if (size >= 100) { // If the user entered a number > 100
         alert("Please enter a size below 100");
@@ -76,7 +76,7 @@ const changeSize = (board, createBoard, hoverColor, clearBoard, changeColor) => 
     }
 
     // Clears the board because if we don't clear it,
-    // The new board is gonna be added on top of the old board
+    // the new board is gonna be added on top of the old board
     clearBoard(board);
 
     // Creates the board and puts its nodelist in this variable
