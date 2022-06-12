@@ -6,11 +6,16 @@ const changeColor = pixel => {
 };
 
 // Function to create board
-const createBoard = board => {
-    for(let i = 0; i < 256; i++) {
+const createBoard = (board, pixels) => {
+    board.style.gridTemplateColumns = `repeat(${pixels}, ${100/pixels}%)`;
+
+    for(let i = 0; i < pixels * pixels; i++) {
         const pixel = document.createElement("div");
         pixel.classList.add("pixel");
         pixel.id = "pixel" + i;
+        pixel.style.width = `${960/pixels}px`;
+        pixel.style.height = `${960/pixels}px`;
+
         board.append(pixel);
     }
     
@@ -20,7 +25,7 @@ const createBoard = board => {
 }
 
 const board = document.getElementById("board");
-const pixel = createBoard(board);
+const pixel = createBoard(board, 16);
 
 pixel.forEach(square => {
     square.addEventListener("mouseover", changeColor);
