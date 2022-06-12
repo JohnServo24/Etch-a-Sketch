@@ -6,7 +6,8 @@
 .board {
     display: grid;
     grid-template-columns: repeat(16, 6.25%);
-    width: 800px;
+    width: 960px;
+    border: 1px solid black;
 
     .pixel {
         width: 50px;

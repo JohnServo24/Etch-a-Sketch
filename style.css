@@ -8,7 +8,8 @@
   display: grid;
   -ms-grid-columns: (6.25%)[16];
       grid-template-columns: repeat(16, 6.25%);
-  width: 800px;
+  width: 960px;
+  border: 1px solid black;
 }
 
 .board .pixel {
