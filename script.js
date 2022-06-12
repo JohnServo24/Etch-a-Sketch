@@ -25,6 +25,12 @@ const createBoard = (board, pixels) => {
     return boardOutput;
 };
 
+const hoverColor = (pixel, changeColor) => {
+    pixel.forEach(square => {
+        square.addEventListener("mouseover", changeColor);
+    });
+}
+
 const changeSize = a => {
     // const size = prompt("Plese enter the size of the grid");
 
@@ -39,10 +45,7 @@ const pixel = createBoard(board, 16);
 
 changeSizeBtn.addEventListener("click", changeSize);
 
-pixel.forEach(square => {
-    square.addEventListener("mouseover", changeColor);
-});
-
+hoverColor(pixel, changeColor);
 
 
 
