@@ -11,7 +11,7 @@ const changeColor = pixel => {
 };
 
 // Creates the default board
-const defaultBoard = (board, hoverColor, changeColor) => {
+const defaultBoard = (board, createBoard, hoverColor, changeColor) => {
     // Creates a 16x16 board
     let pixel = createBoard(board, 16);
     hoverColor(pixel, changeColor);
@@ -90,7 +90,7 @@ const board = document.getElementById("board"); // Gets the board
 const changeSizeBtn = document.getElementById("changeSizeBtn"); // Gets the button
 
 // Creates the default board
-defaultBoard(board, hoverColor, changeColor);
+defaultBoard(board, createBoard, hoverColor, changeColor);
 
 // Button to change the size of the board
 changeSizeBtn.addEventListener("click", () => {changeSize(board, createBoard, hoverColor, clearBoard, changeColor)});
