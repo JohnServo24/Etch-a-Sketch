@@ -2,12 +2,11 @@
 // Function to add color to a pixel
 const changeColor = pixel => {
     const square = document.getElementById(pixel.originalTarget.id);
-    square.style.backgroundColor = "red";
+    square.style.backgroundColor = "black";
 };
 
 // Function to create board
 const createBoard = (board, pixels) => {
-
     board.style.gridTemplateColumns = `repeat(${pixels}, ${100/pixels}%)`;
 
     for(let i = 0; i < pixels * pixels; i++) {
@@ -15,7 +14,7 @@ const createBoard = (board, pixels) => {
         pixel.classList.add("pixel");
         pixel.id = "pixel" + i;
         pixel.style.width = `${960/pixels}px`;
-        pixel.style.height = `${960/pixels}px`;
+        pixel.style.height = `${960/pixels}psx`;
 
         board.append(pixel);
     }
@@ -25,27 +24,34 @@ const createBoard = (board, pixels) => {
     return boardOutput;
 };
 
+const clearBoard = board => {
+    while(board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+};
+
 const hoverColor = (pixel, changeColor) => {
     pixel.forEach(square => {
         square.addEventListener("mouseover", changeColor);
     });
 }
 
-const changeSize = a => {
-    // const size = prompt("Plese enter the size of the grid");
-
-    // return parseInt(size);
-
-    console.log(a);
+const changeSize = (board, pixel, hoverColor) => {
+    const size = prompt("Plese enter the size of the grid");
+    clearBoard(board);
+    pixel = createBoard(board, parseInt(size));
+    hoverColor(pixel, changeColor);
 };
 
 const board = document.getElementById("board");
 const changeSizeBtn = document.getElementById("changeSizeBtn");
-const pixel = createBoard(board, 16);
 
-changeSizeBtn.addEventListener("click", changeSize);
-
+let pixel = createBoard(board, 16);
 hoverColor(pixel, changeColor);
+
+changeSizeBtn.addEventListener("click", () => {changeSize(board, pixel, hoverColor)});
+
+
 
 
 
