@@ -5,16 +5,22 @@ const changeColor = pixel => {
     square.style.backgroundColor = "red";
 };
 
-const board = document.getElementById("board");
-
-for(let i = 0; i < 256; i++) {
-    const pixel = document.createElement("div");
-    pixel.classList.add("pixel");
-    pixel.id = "pixel" + i;
-    board.append(pixel);
+// Function to create board
+const createBoard = board => {
+    for(let i = 0; i < 256; i++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixel");
+        pixel.id = "pixel" + i;
+        board.append(pixel);
+    }
+    
+    // Returns the nodelist of all pixels to be used later
+    const boardOutput = document.querySelectorAll(".pixel");
+    return boardOutput;
 }
 
-const pixel = document.querySelectorAll(".pixel");
+const board = document.getElementById("board");
+const pixel = createBoard(board);
 
 pixel.forEach(square => {
     square.addEventListener("mouseover", changeColor);
