@@ -65,7 +65,7 @@ const changeSize = (board, createBoard, hoverColor, clearBoard, changeColor) => 
     // Asks user to enter the size of the grid
     let size = prompt("Plese enter the size of the grid");
 
-    if (size === "") { // If the user didn't enter anything
+    if (!size) { // If the user didn't enter anything
         return;
     } else if (size >= 100) { // If the user entered a number > 100
         alert("Please enter a size below 100");
