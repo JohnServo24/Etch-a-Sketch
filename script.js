@@ -1,5 +1,6 @@
 // NOTE: The extra, messy comments are for myself so that I can understand what's going on
 
+// Generates a random number for RGB
 const generateRandNum = limit => {
     return Math.floor((Math.random() * limit) + 1);
 };
