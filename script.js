@@ -1,13 +1,19 @@
 // NOTE: The extra, messy comments are for myself so that I can understand what's going on
 
-
+const generateRandNum = limit => {
+    return Math.floor((Math.random() * limit) + 1);
+};
 
 // Function to add color to a pixel
 const changeColor = pixel => {
+    let r = generateRandNum(255);
+    let g = generateRandNum(255);
+    let b = generateRandNum(255);
+
     // Gets the target ID from the object of the div
     const square = document.getElementById(pixel.originalTarget.id);
     // Changes it into black
-    square.style.backgroundColor = "black";
+    square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 };
 
 // Creates the default board
